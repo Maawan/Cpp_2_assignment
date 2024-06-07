@@ -34,7 +34,7 @@ int Creature::get_power() const {
 
 // Stream insertion operator
 ostream& operator << (ostream& os, const Creature& c) {
-    os << c.get_key() << c.get_type() << c.get_power();
+    os << "("<<c.get_key()<<", " << c.get_type()<<", " << c.get_power()<<")";
     return os;
 }
 
