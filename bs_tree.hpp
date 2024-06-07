@@ -1,11 +1,3 @@
-/*
-* bs_tree.hpp
-* Written by : SENG1120 Staff (c1234567)
-* Modified : 05/10/2023
-*
-* This file contains the implementation of the BSTree class defined in bs_tree.h.
-*/
-
 #include "bs_tree.h"
 
 // Default constructor
@@ -28,19 +20,21 @@ void BSTree<T>::insert(const T& data) {
     ++count;
 }
 
-// Remove item with specified key from the tree
+// Remove item with specified key from the tree, if not passed the Node, it will use 
+// global root
 template <typename T>
 void BSTree<T>::remove(const std::string& key) {
     root = remove(key, root);
 }
 
-// Determine if an item with specified key exists in the tree
+// Determine if an item with specified key exists in the tree, if not passed the Node,
+// it use the global root
 template <typename T>
 bool BSTree<T>::contains(const std::string& key) const {
     return contains(key, root);
 }
 
-// Clear all nodes from the tree
+// Clear all nodes from the tree and freeing the allocated memory
 template <typename T>
 void BSTree<T>::clear() {
     clear(root);
@@ -52,7 +46,11 @@ void BSTree<T>::clear() {
 template <typename T>
 T* BSTree<T>::find(const std::string& key) const {
     BTNode<T>* node = find(key, root);
-    return node ? &(node->get_data()) : nullptr;
+    if(node){
+        return &(node->get_data());
+    }else{
+        return nullptr;
+    }
 }
 
 // Find item with minimum data value in the tree
@@ -105,7 +103,7 @@ void BSTree<T>::print_postorder(std::ostream& out) const {
     print_postorder(out, root);
 }
 
-// Clear all nodes from the sub-tree rooted at the supplied node
+// Remove all nodes from the sub-tree rooted at the supplied node
 template <typename T>
 void BSTree<T>::clear(BTNode<T>* node) {
     if (node != nullptr) {
@@ -115,7 +113,7 @@ void BSTree<T>::clear(BTNode<T>* node) {
     }
 }
 
-// Insert data into the sub-tree rooted at the supplied node
+// Insert data into the sub-tree rooted at the given node
 template <typename T>
 BTNode<T>* BSTree<T>::insert(const T& data, BTNode<T>* node) {
     if (node == nullptr) {
