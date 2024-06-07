@@ -82,7 +82,7 @@ void CreatureTracker::clear() {
 }
 
 void CreatureTracker::print(std::ostream& os) const {
-    os << "Creatures:\n" << tree_creatures << "\n";
+    os << "Creatures: " << tree_creatures << "\n";
     os << "Type stats:\n" << ht_stats << "\n";
 }
 
